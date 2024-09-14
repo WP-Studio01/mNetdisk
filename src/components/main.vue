@@ -1,4 +1,4 @@
-<template>
+<template id="main">
   <UserInfo class="main-elements" />
   <Netdisk class="main-elements" />
   <Chat class="main-elements" />
@@ -22,10 +22,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .main-elements {
-  width: 32%;
+  width: 30%;
   margin: 10px;
   height: 600px;
   background-color: #fafafa;
   float: left;
+}
+#main {
+  margin: 0 auto;
 }
 </style>
