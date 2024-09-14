@@ -4,7 +4,7 @@
         <button @click="onLogin">Login</button>
         <button>Register</button>
         <br />
-        <form action="http://netdisk.wpgzs.rf.gd/login.php" method="post" id="login">
+        <form action="http://netdisk.wpgzs.rf.gd/login.php" method="post" v-show="showLoginBox">
             <label>Username:</label>
             <input type="text" name="username" />
             <br />
@@ -22,10 +22,10 @@ export default {
     name: "UserInfo",
     usrname: null,
     logined: false,
+    showLoginBox: false,
     methods: {
         onLogin(){
-            let login=document.getElementById('login');
-            login.style.display='block';
+            this.showLoginBox=!this.showLoginBox;
         }
     },
     onMounted(){
@@ -54,7 +54,8 @@ export default {
         return {
             usrname: this.usrname,
             logined: this.logined,
-            callback: window.location.href
+            callback: window.location.href,
+            showLoginBox: this.showLoginBox
         };
     }
 };
@@ -83,8 +84,5 @@ input:hover {
 }
 input:focus {
     background-color: #e0e0e0;
-}
-#login {
-    display: none;
 }
 </style>
