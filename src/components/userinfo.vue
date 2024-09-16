@@ -15,28 +15,36 @@
             <br />
             <button type="submit">Login</button>
         </form>
-        <form action="http://wpgzs.rf.gd/register.php" method="post" v-show="showRegBox">
+        <form @submit.prevent="handleSubmitReg" action="http://wpgzs.rf.gd/register.php" method="post" v-show="showRegBox">
             <label>Username:</label>
             <input type="text" name="username" />
             <br />
             <label>Password:</label>
-            <input type="password" name="password" />
+            <input type="password" id="pas1" name="password" />
             <br />
             <label>Password agin:</label>
-            <input type="password" />
+            <input type="password" id="pas2" />
             <br />
             <!-- <img src="http://wpgzs.rf.gd/generate_captcha.php" crossorigin="anonymous" alt="点我获取验证码" class="captcha" @click="captcha" /> -->
+            <vue-turnstile site-key="0x4AAAAAAAj5HOE7l1x_WjaW" v-model="token" />
+            <input type="hidden" name="token" :value="token" />
         </form>
     </div>
 </template>
 
 <script>
+import VueTurnstile from 'vue-turnstile'
+
 export default {
     name: "UserInfo",
+    components: {
+        VueTurnstile
+    },
     usrname: null,
     logined: false,
     showLoginBox: false,
     showRegBox: false,
+    token: "",
     methods: {
         onLogin(){
             this.showLoginBox=!this.showLoginBox;
@@ -48,6 +56,15 @@ export default {
         },
         captcha(e){
             e.target.src='http://wpgzs.rf.gd/generate_captcha.php?'+new Date().getTime();
+        },
+        handleSubmitReg(){
+            let pas1=document.getElementById('pas1');
+            let pas2=document.getElementById('pas2');
+            if(pas1.value!=pas2.value){
+                window.alert('password error');
+                return false;
+            }
+            return true;
         }
     },
     onMounted(){
@@ -79,6 +96,7 @@ export default {
             callback: window.location.href,
             showLoginBox: this.showLoginBox,
             showRegBox: this.showRegBox,
+            token: this.token
         };
     }
 };
