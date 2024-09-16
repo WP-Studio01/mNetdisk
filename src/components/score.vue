@@ -1,10 +1,10 @@
 <template>
-    <h1>Chat</h1>
+    <h1>Score</h1>
 </template>
 
 <script>
 export default {
-    name: "Chat"
+    name: "Score"
 };
 </script>
 

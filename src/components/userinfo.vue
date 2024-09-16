@@ -1,10 +1,11 @@
 <template>
+    <!-- <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> -->
     <h1 v-if="logined">{{ 'Hello, ' + usrname }}</h1>
     <div v-else>
         <button @click="onLogin">Login</button>
-        <button>Register</button>
+        <button @click="onReg">Register</button>
         <br />
-        <form action="http://netdisk.wpgzs.rf.gd/login.php" method="post" v-show="showLoginBox">
+        <form action="http://wpgzs.rf.gd/login.php" method="post" v-show="showLoginBox">
             <label>Username:</label>
             <input type="text" name="username" />
             <br />
@@ -13,6 +14,18 @@
             <input type="hidden" name="callback" v-bind:value="callback" />
             <br />
             <button type="submit">Login</button>
+        </form>
+        <form action="http://wpgzs.rf.gd/register.php" method="post" v-show="showRegBox">
+            <label>Username:</label>
+            <input type="text" name="username" />
+            <br />
+            <label>Password:</label>
+            <input type="password" name="password" />
+            <br />
+            <label>Password agin:</label>
+            <input type="password" />
+            <br />
+            <!-- <img src="http://wpgzs.rf.gd/generate_captcha.php" crossorigin="anonymous" alt="点我获取验证码" class="captcha" @click="captcha" /> -->
         </form>
     </div>
 </template>
@@ -23,9 +36,18 @@ export default {
     usrname: null,
     logined: false,
     showLoginBox: false,
+    showRegBox: false,
     methods: {
         onLogin(){
             this.showLoginBox=!this.showLoginBox;
+            this.showRegBox=false;
+        },
+        onReg(){
+            this.showRegBox=!this.showRegBox;
+            this.showLoginBox=false;
+        },
+        captcha(e){
+            e.target.src='http://wpgzs.rf.gd/generate_captcha.php?'+new Date().getTime();
         }
     },
     onMounted(){
@@ -55,7 +77,8 @@ export default {
             usrname: this.usrname,
             logined: this.logined,
             callback: window.location.href,
-            showLoginBox: this.showLoginBox
+            showLoginBox: this.showLoginBox,
+            showRegBox: this.showRegBox,
         };
     }
 };
@@ -84,5 +107,8 @@ input:hover {
 }
 input:focus {
     background-color: #e0e0e0;
+}
+.captcha {
+    margin: 5px;
 }
 </style>

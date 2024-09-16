@@ -1,5 +1,5 @@
 <template>
-  <h1 id="wc">Welcome</h1>
+  <h1 id="wc">欢迎使用角落网盘</h1>
   <Main />
 </template>
 

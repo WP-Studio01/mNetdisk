@@ -1,20 +1,20 @@
 <template id="main">
   <UserInfo class="main-elements" />
   <Netdisk class="main-elements" />
-  <Chat class="main-elements" />
+  <Score class="main-elements" />
 </template>
 
 <script>
 import UserInfo from './userinfo.vue'
 import Netdisk from './netdisk.vue'
-import Chat from './chat.vue'
+import Score from './score.vue'
 export default {
   name: 'Main',
   props: {},
   components: {
     UserInfo,
     Netdisk,
-    Chat
+    Score
   }
 }
 </script>
@@ -24,7 +24,7 @@ export default {
 .main-elements {
   width: 30%;
   margin: 10px;
-  height: 600px;
+  height: 400px;
   background-color: #fafafa;
   float: left;
 }
